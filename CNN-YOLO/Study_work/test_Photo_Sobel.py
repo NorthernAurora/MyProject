@@ -42,15 +42,31 @@ cv2.imshow('absy',sobel_y)
 cv2.waitKey(1000)
 cv2.destroyAllWindows()
 #分别计算x和y，再求和
-sobel_xy = cv2.addWeighted(sobel_x,0.5,sobel_y,0.5,0)#0为偏置
+sobel_xy = cv2.addWeighted(sobel_x,0.5,sobel_y,0.5,0)#0为偏置，0.5为权重
 cv2.imshow('xy',sobel_xy)
 cv2.waitKey(1000)
 cv2.destroyAllWindows()
-
+#直接计算求和，精度过低
 sobel_xy2 = cv2.Sobel(img,cv2.CV_64F,1,1,ksize = 1)
 cv2.imshow('xy2',sobel_xy2)
+cv2.waitKey(1000)
+cv2.destroyAllWindows()
+
+#结合上述实现一个描边策略
+img_g = cv2.imread('moongold.jpg',cv2.IMREAD_GRAYSCALE)
+
+sobel_x1 = cv2.Sobel(img_g,cv2.CV_64F,1,0,ksize = 3)
+sobel_x1 = cv2.convertScaleAbs(sobel_x1)
+
+sobel_y1 = cv2.Sobel(img_g,cv2.CV_64F,0,1,ksize = 3)
+sobel_y1 = cv2.convertScaleAbs(sobel_y1)
+
+sobel_xy3 = cv2.addWeighted(sobel_x1,0.5,sobel_y1,0.5,0)
+cv2.imshow('xy3',sobel_xy3)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
+
 
 
 

@@ -29,7 +29,7 @@ while cap.isOpened():
         mask_img = skinmask(img)
         contours, hull = getcnthull(mask_img)
         cv.drawContours(img, [contours], -1, (255,255,0), 2)
-        cv.drawContours(img, [hull], -1, (0, 255, 255), 2)
+        cv.drawContours(img, [hull], -1, (0, 125, 255), 2)
         defects = getdefects(contours)
         if defects is not None:
             cnt = 0
